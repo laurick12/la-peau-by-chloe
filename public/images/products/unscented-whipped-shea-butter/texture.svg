@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2000" viewBox="0 0 1600 2000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEDF"/><stop offset=".62" stop-color="#EFE3D2"/><stop offset="1" stop-color="#D8BE9C"/></linearGradient>
+    <clipPath id="arch"><path d="M60 1250 L60 520 Q60 160 800 120 Q1540 160 1540 520 L1540 1250 Z"/></clipPath>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <ellipse cx="800" cy="320" rx="672" ry="150" fill="#fff" opacity=".18"/>
+  <g clip-path="url(#arch)">
+    <rect x="60" y="100" width="1480" height="1180" fill="#FBF3E4"/>
+    <rect x="60" y="100" width="1480" height="1180" fill="#FBF6EC"/><path d="M-60 420 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><path d="M-60 620 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><path d="M-60 820 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><path d="M-60 1020 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><path d="M-60 1220 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><path d="M-60 1420 q 420 -150 830 0 t 900 0" fill="none" stroke="#fff" stroke-width="46" opacity=".6"/><ellipse cx="1150" cy="420" rx="180" ry="60" fill="#fff" opacity=".35"/>
+  </g>
+  <path d="M60 1250 L60 520 Q60 160 800 120 Q1540 160 1540 520 L1540 1250 Z" fill="none" stroke="#8E6A2E" stroke-width="6"/>
+  <rect x="1270" y="80" width="250" height="250" rx="125" fill="#2F2620" transform="rotate(10 1395 205)"/>
+  <text x="1395" y="190" text-anchor="middle" font-family="Helvetica,Arial" font-size="34" font-weight="bold" fill="#F4ECDF" letter-spacing="3" transform="rotate(10 1395 205)">PROOF</text>
+  <text x="1395" y="232" text-anchor="middle" font-family="Helvetica,Arial" font-size="30" fill="#E8B93E" letter-spacing="2" transform="rotate(10 1395 205)">OF CONCEPT</text>
+</svg>

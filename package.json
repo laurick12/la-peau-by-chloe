@@ -1,0 +1,35 @@
+{
+  "name": "la-peau-by-chloe",
+  "version": "0.1.0",
+  "private": true,
+  "description": "E-commerce storefront for La Peau by Chloe \u2014 100% natural shea butter for sensitive skin.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "placeholders": "node scripts/generate-placeholders.mjs",
+    "optimize:logo": "node scripts/optimize-logo.mjs",
+    "vectorize:logo": "node scripts/vectorize-logo.mjs"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "@stripe/react-stripe-js": "^7.0.1",
+    "@stripe/stripe-js": "^10.2.0",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "stripe": "^23.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "potrace": "^2.1.8",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3"
+  }
+}
