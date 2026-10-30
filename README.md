@@ -29,7 +29,7 @@ Built with **Next.js (App Router) + TypeScript + Stripe**. No database required 
 | Styling | Hand-written CSS with design tokens (`app/globals.css`), no CSS framework |
 | Fonts | Cormorant Garamond (headings), Jost (body), Pinyon Script (accents) via `next/font` |
 | Payments | Stripe Payment Intents + Payment Element; manual Cash App / Zelle |
-| Hosting | Any Node host, Vercel recommended |
+| Hosting | Azure Static Web Apps (hybrid Next.js) or any Node host, including Vercel |
 
 ## Project structure
 
@@ -140,6 +140,19 @@ Customers see your handle, the exact amount, and their order number to use as th
 - **Zapier / Make** “Catch Hook” → email yourself + add a row to Google Sheets
 - **Slack** incoming webhook
 - Replace `lib/orders.ts › notifyNewOrder` with an email provider (Resend, Postmark) or a database
+
+## Deploy (Azure Static Web Apps)
+
+The Azure workflow in `.github/workflows/azure-static-web-apps-ambitious-plant-0e4a63e0f.yml`
+deploys pushes to `main` and creates preview deployments for pull requests into `main`.
+
+1. In Azure, connect your Static Web App to this repository and the `main` branch, using the **Next.js** build preset.
+2. Set **App location** to `/`, leave **API location** empty, and leave **Output location** empty. This enables hybrid Next.js hosting, including `/api/checkout` and `/api/webhooks/stripe`. Do not use `build`, `out`, or `.next` as the output location or enable `output: "export"`: this storefront needs its server-side payment routes.
+3. Ensure the GitHub Actions repository secret `AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_PLANT_0E4A63E0F` contains the deployment token for this Azure Static Web App. If necessary, copy it from Azure's **Manage deployment token**.
+4. Configure the environment variables above in the Azure Static Web App settings. Also pass any `NEXT_PUBLIC_*` values you customize through the workflow's **Build And Deploy** step `env` section: Next.js embeds these values during the build. Keep Stripe secret keys and webhook secrets in Azure's runtime settings, not in the repository.
+5. After merging the workflow into `main`, check the **Build and Deploy Job** in GitHub Actions, then configure your domain, `NEXT_PUBLIC_SITE_URL`, and the production Stripe webhook.
+
+If a run reports `The app build failed to produce artifact folder: 'build'`, the build itself succeeded but the workflow is looking in the wrong directory. Keep `output_location: ""` so Azure detects and packages the hybrid Next.js application. A successful **Close Pull Request Job** only removes a preview deployment; it does not mean the production site was deployed.
 
 ## Deploy (Vercel)
 
