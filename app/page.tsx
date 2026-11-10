@@ -117,11 +117,11 @@ export default function HomePage() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Charlotte, NC</span>
-            <h2>Shipped, picked up, or hand-delivered.</h2>
+            <h2>Shipped, picked up, or hand&#8209;delivered.</h2>
             <p>We're local to the Charlotte area. Skip the wait with free pickup or same-week delivery from Matthews (28104).</p>
           </div>
           <div className="local-cards">
-            <div className="local-card tilt-l">
+            <div className="local-card">
               <span className="eyebrow">Local Pickup</span>
               <div className="price">Free</div>
               <p>Pick up in the Matthews / Charlotte area. Address & times sent after you order.</p>

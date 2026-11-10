@@ -340,6 +340,10 @@ p { margin: 0 0 1em; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 5px 10px;
+  max-width: calc(100% - 24px);
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 .card__body { padding-top: 16px; text-align: center; }
 .card__collection {
@@ -489,7 +493,7 @@ p { margin: 0 0 1em; }
 .benefit-list li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-soft); }
 
 .never { display: flex; flex-wrap: wrap; gap: 8px 14px; }
-.never span { font-size: 0.82rem; color: var(--muted); text-decoration: line-through; text-decoration-color: var(--gold-soft); }
+.never span { font-size: 0.88rem; color: var(--ink); opacity: .8; text-decoration: line-through; text-decoration-color: var(--gold-deep); text-decoration-thickness: 1.5px; }
 
 .note {
   background: var(--cream);
@@ -687,7 +691,7 @@ main, .header, .footer, .announcement { position: relative; z-index: 2; }
 .card__media--arch { border-radius: 999px 999px 6px 6px; border: 1px solid var(--line); box-shadow: 0 18px 36px rgba(47,38,32,.10); }
 .card__sticker { position: absolute; right: 8px; bottom: 12px; z-index: 3; transform: rotate(10deg); filter: drop-shadow(0 6px 10px rgba(47,38,32,.3)); }
 .sticker { position: relative; display: inline-grid; place-items: center; font-family: var(--font-sans); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cream); }
-.sticker__star { position: absolute; inset: 0; background: var(--gold-deep); clip-path: polygon(50% 0,58% 12%,72% 6%,72% 20%,87% 20%,83% 34%,97% 40%,88% 51%,97% 62%,82% 66%,85% 81%,70% 79%,66% 94%,55% 84%,45% 94%,40% 80%,25% 81%,28% 66%,13% 61%,23% 50%,14% 39%,29% 35%,26% 20%,41% 21%,44% 6%,57% 13%); }
+.sticker__star { position: absolute; inset: 0; background: var(--gold-deep); border-radius: 50%; box-shadow: inset 0 0 0 3px var(--gold-deep), inset 0 0 0 4.5px rgba(251,248,243,.85); }
 .sticker__text { position: relative; display: flex; flex-direction: column; align-items: center; line-height: 1.25; padding: 0 12px; text-align: center; }
 .sticker__text strong { color: var(--gold-soft); font-size: 1.1em; }
 
@@ -696,10 +700,19 @@ main, .header, .footer, .announcement { position: relative; z-index: 2; }
 .local-card { box-shadow: 0 14px 28px rgba(47,38,32,.08); }
 .header__logo img { border-radius: 50%; background: rgba(251,248,243,.7); }
 
-/* v3 photo pass: keep badge clear of the arch, stop long sticker words clipping */
-.card__media--arch .card__badge { top: auto; bottom: 14px; left: 12px; }
+/* v4 visual fixes: badge + sticker share the card's bottom edge without
+   clipping each other or the arch. The badge wraps instead of overflowing.
+   The sticker is now a round seal: the starburst narrowed toward its top
+   and bottom rows, so long words like RECOMMENDS spilled off the gold.
+   A circle stays full-width at every text row, and reads more premium. */
+.card__media--arch .card__badge { top: auto; bottom: 12px; left: 12px; max-width: calc(100% - 112px); }
+.card__sticker { right: 14px; bottom: 12px; transform: rotate(5deg); }
 .sticker { letter-spacing: .04em; }
-.sticker__text { padding: 0 8px; }
+.sticker__text { padding: 0 6px; }
+@media (max-width: 560px) {
+  .card__media--arch .card__badge { max-width: calc(100% - 78px); font-size: .58rem; letter-spacing: .1em; padding: 4px 8px; }
+  .card__sticker .sticker { width: 60px !important; height: 60px !important; font-size: 6.8px !important; }
+}
 .hero-collage__logo, .header__logo img { background: none; }
 
 

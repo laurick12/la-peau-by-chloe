@@ -195,7 +195,7 @@ export const products: Product[] = [
     howToUse:
       "Warm a small scoop between palms and smooth over skin. Apply to pulse points for a soft, lingering floral note.",
     skinNote: "Contains sweet almond oil (tree nut). Patch test first if you have known sensitivities.",
-    badges: ["Pure Botanical Oils", "Whipped", "No Synthetic Fragrance"],
+    badges: ["Botanical Oils", "Whipped", "No Synthetic Fragrance"],
     accent: "#EADFD6",
   },
   {
@@ -233,7 +233,7 @@ export const products: Product[] = [
     howToUse:
       "Use a fingertip-sized amount on beard and face after shaving, or all over body after showering.",
     skinNote: "Contains essential oils. Patch test first if you have known sensitivities.",
-    badges: ["Natural Essential Oils", "Beard & Body", "No Synthetic Fragrance"],
+    badges: ["Essential Oils", "Beard & Body", "No Synthetic Fragrance"],
     accent: "#D9C7AE",
   },
 ];

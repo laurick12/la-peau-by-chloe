@@ -3,7 +3,7 @@ import type { Product } from "@/data/products";
 /** Per-product "recommended" sticker line for the proof of concept. */
 const STICKERS: Record<string, { top: string; bottom: string }> = {
   "original-raw-shea-butter": { top: "Chloe", bottom: "Recommends" },
-  "unscented-whipped-shea-butter": { top: "Eczema-Prone", bottom: "Pick" },
+  "unscented-whipped-shea-butter": { top: "Eczema", bottom: "Pick" },
   "vanilla-coconut-whipped-shea": { top: "Customer", bottom: "Favorite" },
   "floral-jasmine-whipped-shea": { top: "Most", bottom: "Romantic" },
   "cedarwood-amber-whipped-shea": { top: "For Him", bottom: "Pick" },
@@ -15,7 +15,7 @@ export function Sticker({ product, size = 92 }: { product: Product; size?: numbe
     <span
       className="sticker"
       aria-label={`${s.top} ${s.bottom}`}
-      style={{ width: size, height: size, fontSize: size / 7.6 }}
+      style={{ width: size, height: size, fontSize: size / 8.8 }}
     >
       <span className="sticker__star" aria-hidden />
       <span className="sticker__text">
