@@ -7,7 +7,7 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { ZipChecker } from "@/components/ZipChecker";
 import { NEVER_INSIDE, products } from "@/data/products";
 import { DELIVERY_TIERS, SHIPPING } from "@/config/fulfillment";
-import { siteImage } from "@/config/site";
+import { siteImageSrcSet, siteImageWebp } from "@/config/site";
 import { formatMoney } from "@/lib/format";
 
 const HERO_INGREDIENTS = [
@@ -22,12 +22,19 @@ export default function HomePage() {
     <>
       {/* Magazine-cover hero */}
       <section className="cover" aria-label="La Peau by Chloe">
-        <div className="cover__photo cover__photo--desktop">
-          <ProductImage src={siteImage("hero-desktop")} alt="La Peau by Chloe shea butter jars on travertine in warm window light" fill priority sizes="100vw" />
-        </div>
-        <div className="cover__photo cover__photo--mobile">
-          <ProductImage src={siteImage("hero-mobile")} alt="La Peau by Chloe shea butter jars" fill priority sizes="100vw" />
-        </div>
+        {/* One hero per device: <picture> picks mobile or desktop by viewport,
+          so the browser downloads exactly one hero instead of both. The plain
+          <img> keeps fetchpriority="high" for LCP. */}
+      <picture className="cover__photo cover__photo--hero">
+        <source media="(max-width: 860px)" srcSet={siteImageSrcSet("hero-mobile", [640, 828, 1080])} sizes="100vw" />
+        <img
+          src={siteImageWebp("hero-desktop", 1920)}
+          srcSet={siteImageSrcSet("hero-desktop", [640, 1080, 1920, 2400])}
+          sizes="100vw"
+          alt="La Peau by Chloe shea butter jars on travertine in warm window light"
+          fetchPriority="high"
+        />
+      </picture>
 
         <p className="cover__rail" aria-hidden>Small batch · Charlotte, North Carolina · Made for sensitive skin</p>
 
@@ -90,7 +97,7 @@ export default function HomePage() {
       <section className="section section--cream section--tilted" id="ingredients">
         <div className="container split">
           <div className="split__media split__media--arch tilt-l">
-            <ProductImage src={siteImage("ingredients-story")} alt="Raw shea nuts, shea butter, coconut and jojoba" fill sizes="(max-width: 860px) 100vw, 50vw" />
+            <ProductImage src={siteImageWebp("ingredients-story", 1080)} srcSet={siteImageSrcSet("ingredients-story", [640, 1080, 1600])} alt="Raw shea nuts, shea butter, coconut and jojoba" fill sizes="(max-width: 860px) 100vw, 50vw" />
           </div>
           <div>
             <span className="eyebrow">Clean Beauty, Honestly</span>
@@ -156,7 +163,7 @@ export default function HomePage() {
             <Link href="/shop" className="btn mt-lg">Find your butter</Link>
           </div>
           <div className="split__media split__media--portrait split__media--arch tilt-r">
-            <ProductImage src={siteImage("founder")} alt="Chloe whipping shea butter by hand" fill sizes="(max-width: 860px) 100vw, 50vw" />
+            <ProductImage src={siteImageWebp("founder", 1080)} srcSet={siteImageSrcSet("founder", [640, 1080, 1600])} alt="Chloe whipping shea butter by hand" fill sizes="(max-width: 860px) 100vw, 50vw" />
           </div>
         </div>
       </section>

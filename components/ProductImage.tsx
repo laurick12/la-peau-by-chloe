@@ -1,11 +1,38 @@
 import Image, { type ImageProps } from "next/image";
+import type { CSSProperties } from "react";
 
 /**
- * next/image wrapper that serves generated SVG placeholders unoptimized and
- * real photography (jpg/png/webp) through the Next.js image optimizer.
+ * Image wrapper.
+ *
+ * Pre-generated WebP files (and SVG placeholders) are served as plain
+ * static files through a plain <img>: next/image does not accept a custom
+ * srcSet, and sending these through the optimizer would re-transform them
+ * on every cache miss — which was the slow first visit. The optimizer is
+ * no longer used for photos. `fill` is translated to the same absolute
+ * positioning next/image would apply, and `priority` becomes
+ * fetchpriority="high".
  */
-export function ProductImage(props: Omit<ImageProps, "unoptimized">) {
+type Props = Omit<ImageProps, "unoptimized" | "srcSet"> & {
+  srcSet?: string;
+};
+
+export function ProductImage(props: Props) {
   const src = typeof props.src === "string" ? props.src : "";
-  const isSvg = src.endsWith(".svg");
-  return <Image {...props} unoptimized={isSvg} />;
+  const isStatic = src.endsWith(".svg") || src.endsWith(".webp");
+  if (!isStatic) return <Image {...props} unoptimized={false} />;
+
+  const { fill, priority, sizes, srcSet, style, ...rest } = props;
+  const fillStyle: CSSProperties | undefined = fill
+    ? { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }
+    : undefined;
+  return (
+    <img
+      {...rest}
+      src={src}
+      srcSet={srcSet}
+      sizes={sizes}
+      fetchPriority={priority ? "high" : undefined}
+      style={{ ...fillStyle, ...style }}
+    />
+  );
 }

@@ -261,6 +261,15 @@ export function productImage(slug: string, key: ImageKey) {
   return `/images/products/${slug}/${key}.${siteConfig.imageExt}`;
 }
 
+/** Pre-generated WebP variants, e.g. main-800.webp (see config/site.ts). */
+const WEBP_WIDTHS = [400, 800, 1200];
+export function productImageWebp(slug: string, key: ImageKey, width: number) {
+  return `/images/products/${slug}/${key}-${width}.webp`;
+}
+export function productImageSrcSet(slug: string, key: ImageKey) {
+  return WEBP_WIDTHS.map((w) => `${productImageWebp(slug, key, w)} ${w}w`).join(", ");
+}
+
 export function fromPriceCents(product: Product) {
   return Math.min(...product.sizes.map((s) => s.priceCents));
 }

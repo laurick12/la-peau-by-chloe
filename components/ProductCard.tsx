@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { ProductImage } from "@/components/ProductImage";
 import { Sticker } from "@/components/Sticker";
-import { fromPriceCents, productImage, type Product } from "@/data/products";
+import { fromPriceCents, productImageSrcSet, productImageWebp, type Product } from "@/data/products";
 import { formatMoney } from "@/lib/format";
 
 const TILTS = [
@@ -21,11 +24,17 @@ export function ProductCard({
   priority?: boolean;
   index?: number;
 }) {
+  // The hover texture only mounts after the first hover, so it never costs
+  // a download on first paint. It stays mounted afterwards, so repeat
+  // hovers (and the CSS fade-out) work from the cache.
+  const [hovered, setHovered] = useState(false);
+
   return (
     <Link
       href={`/products/${product.slug}`}
       className="card card--editorial"
       style={{ transform: TILTS[index % TILTS.length] }}
+      onMouseEnter={() => setHovered(true)}
     >
       <div className="card__media card__media--arch">
         <span className="card__badge">{product.badges[0]}</span>
@@ -33,19 +42,23 @@ export function ProductCard({
           <Sticker product={product} size={84} />
         </span>
         <ProductImage
-          src={productImage(product.slug, "main")}
+          src={productImageWebp(product.slug, "main", 800)}
+          srcSet={productImageSrcSet(product.slug, "main")}
           alt={`${product.name} jar with La Peau by Chloe logo`}
           fill
           sizes="(max-width: 860px) 50vw, 33vw"
           priority={priority}
         />
-        <ProductImage
-          className="card__hover"
-          src={productImage(product.slug, "texture")}
-          alt={`${product.shortName} texture close-up`}
-          fill
-          sizes="(max-width: 860px) 50vw, 33vw"
-        />
+        {hovered && (
+          <ProductImage
+            className="card__hover"
+            src={productImageWebp(product.slug, "texture", 800)}
+            srcSet={productImageSrcSet(product.slug, "texture")}
+            alt={`${product.shortName} texture close-up`}
+            fill
+            sizes="(max-width: 860px) 50vw, 33vw"
+          />
+        )}
       </div>
       <div className="card__body">
         <div className="card__collection">{product.collection}</div>

@@ -26,3 +26,17 @@ export const paymentConfig = {
 export function siteImage(name: string) {
   return `/images/site/${name}.${siteConfig.imageExt}`;
 }
+
+/**
+ * Pre-generated WebP variants, e.g. hero-desktop-1920.webp. These are served
+ * as plain static files (no Next.js optimizer round-trip, no per-request
+ * transform cost), so pages pass explicit widths + srcSet instead of
+ * relying on the optimizer. Regenerate with the script in
+ * docs/image-pipeline.md if a source photo is replaced.
+ */
+export function siteImageWebp(name: string, width: number) {
+  return `/images/site/${name}-${width}.webp`;
+}
+export function siteImageSrcSet(name: string, widths: number[]) {
+  return widths.map((w) => `${siteImageWebp(name, w)} ${w}w`).join(", ");
+}
