@@ -749,7 +749,12 @@ main, .header, .footer, .announcement { position: relative; z-index: 2; }
   .cover__photo--desktop { display: none; }
   .cover__photo--mobile { display: block; position: absolute; inset: 0; aspect-ratio: auto; }
   .cover__photo--mobile img { object-position: center 38%; }
-  .cover__photo--mobile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,236,223,.97) 0%, rgba(244,236,223,.85) 42%, rgba(244,236,223,.15) 68%, rgba(244,236,223,0) 82%); }
+  .cover__photo--mobile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,236,223,1) 0%, rgba(244,236,223,.97) 50%, rgba(244,236,223,.48) 68%, rgba(244,236,223,.12) 85%, rgba(244,236,223,0) 100%); }
+  /* Contrast: the text zone sits on near-solid cream now, and the gold
+     accents go one shade deeper on mobile — plain gold on a bright photo
+     washed out. A soft cream halo lifts the headline off the jars. */
+  .cover__issue, .cover__title { text-shadow: 0 0 16px rgba(244,236,223,.95), 0 0 4px rgba(244,236,223,.9); }
+  .cover__line em, .cover__script { color: var(--gold-deep); }
   .cover__rail { display: none; }
   .cover__inner { padding-top: 64px; padding-bottom: 28px; }
   .cover__title { margin-top: 16px; }
