@@ -742,15 +742,21 @@ main, .header, .footer, .announcement { position: relative; z-index: 2; }
 .cover__seal { position: absolute; right: 4%; bottom: 7%; z-index: 2; width: 150px !important; height: 150px !important; transform: rotate(-10deg); filter: drop-shadow(0 12px 22px rgba(47,38,32,.32)); }
 
 @media (max-width: 860px) {
-  .cover { display: block; min-height: 0; }
+  /* Mobile hero: photo as a full-bleed background with the text overlaid,
+     same as desktop. The old stacked layout put a tall photo block above
+     the words, so the headline + CTA fell below the fold on phones. */
+  .cover { display: flex; align-items: flex-end; min-height: max(520px, 80svh); }
   .cover__photo--desktop { display: none; }
-  .cover__photo--mobile { display: block; position: relative; aspect-ratio: 4 / 5; }
-  .cover__photo--mobile img { object-position: center; }
+  .cover__photo--mobile { display: block; position: absolute; inset: 0; aspect-ratio: auto; }
+  .cover__photo--mobile img { object-position: center 38%; }
+  .cover__photo--mobile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(244,236,223,.97) 0%, rgba(244,236,223,.85) 42%, rgba(244,236,223,.15) 68%, rgba(244,236,223,0) 82%); }
   .cover__rail { display: none; }
-  .cover__inner { padding-top: 36px; padding-bottom: 48px; }
-  .cover__title { margin-top: 20px; }
-  .cover__line { font-size: 4.2rem; }
+  .cover__inner { padding-top: 64px; padding-bottom: 28px; }
+  .cover__title { margin-top: 16px; }
+  .cover__line { font-size: 3.3rem; }
   .cover__line--indent { padding-left: 36px; }
-  .cover__script { font-size: 3.4rem; margin-left: 110px; }
-  .cover__seal { top: calc(125vw - 70px); bottom: auto; right: 18px; width: 108px !important; height: 108px !important; }
+  .cover__script { font-size: 2.7rem; margin-left: 84px; }
+  .cover__label { margin-top: 20px; }
+  .cover__actions { margin-top: 20px; }
+  .cover__seal { top: 16px; bottom: auto; right: 16px; width: 92px !important; height: 92px !important; }
 }
